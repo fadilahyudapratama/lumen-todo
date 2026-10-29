@@ -21,3 +21,18 @@ $router->get('/', function () use ($router) {
 $router->get('/key', function() {
     return Str::random(32);
 });
+
+// API route group prefix /api
+$router->group(['prefix' => 'api'], function () use ($router) {
+    /*
+     * Matches:
+     * /api/todo (POST, GET)
+     * /api/todo/{id} (GET, PUT, DELETE)
+     */
+    $router->post('todo', 'TodoController@store');
+    $router->get('todo', 'TodoController@index');
+    $router->get('todo/{id}', 'TodoController@show');
+    $router->put('todo/{id}', 'TodoController@update');
+    $router->delete('todo/{id}', 'TodoController@destroy');
+});
+
